@@ -1,0 +1,73 @@
+{{!-- Built using the cs_340 nodejs starter guide: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+{{!-- Create a table --}}
+<table id = "studios_table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.studioID}}</td>
+            <td>{{this.studioDescription}}</td>
+            <td><button onclick="deleteStudio({{this.studioID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_studio.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Studio with AJAX</h2>
+<p>To add a new studio, please enter their information below and click 'Submit'!</p>
+<form id="add-studio-form-ajax">
+    <label for="input-studioDescription">Studio Description: </label>
+    <input type="text" name="input-studioDescription" id="input-studioDescription">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_studio.js"></script>
+
+<h2>Updating A Studio Form</h2>
+<p>To update a specific studio, select their name from the drop down form</p>
+<form id="update-studio-form-ajax">
+
+    <label for="input-studioID-update">Studio Description: </label>
+    <select name="input-studioID-update" id="mySelectStudio">
+        <option value="test">Select a Studio:</option>
+        {{#each studios_list}}
+        <option value="{{this.studioID}}">{{this.studioDescription}}, {{this.studioID}}</option>
+        {{/each}}
+    </select>
+
+    {{!- <label for="input-firstName">first name: </label>
+    <input type="text" name="input-firstName" id="input-firstName">
+
+    <label for="input-lastName">last name: </label>
+    <input type="text" name="input-lastName" id="input-lastName"> --}}
+
+    <label for="input-studioDescription-update">Studio Description: </label>
+    <input type="text" name="input-studioDescription-update" id="input-studioDescription-update">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_studio.js"></script>

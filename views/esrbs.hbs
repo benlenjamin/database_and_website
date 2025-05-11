@@ -1,0 +1,73 @@
+{{!-- Built using the cs_340 nodejs starter guide: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+{{!-- Create a table --}}
+<table id = "esrbs_table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.esrbID}}</td>
+            <td>{{this.esrbDescription}}</td>
+            <td><button onclick="deleteEsrb({{this.esrbID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_esrb.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding ESRB with AJAX</h2>
+<p>To add a new esrb, please enter their information below and click 'Submit'!</p>
+<form id="add-esrb-form-ajax">
+    <label for="input-esrbDescription">ESRB Description: </label>
+    <input type="text" name="input-esrbDescription" id="input-esrbDescription">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_esrb.js"></script>
+
+<h2>Updating A ESRB Form</h2>
+<p>To update a specific ESRB, select their name from the drop down form</p>
+<form id="update-esrb-form-ajax">
+
+    <label for="input-esrbID-update">ESRB Description: </label>
+    <select name="input-esrbID-update" id="mySelectEsrb">
+        <option value="test">Select a ESRB:</option>
+        {{#each esrbs_list}}
+        <option value="{{this.esrbID}}">{{this.esrbDescription}}, {{this.esrbID}}</option>
+        {{/each}}
+    </select>
+
+    {{!- <label for="input-firstName">first name: </label>
+    <input type="text" name="input-firstName" id="input-firstName">
+
+    <label for="input-lastName">last name: </label>
+    <input type="text" name="input-lastName" id="input-lastName"> --}}
+
+    <label for="input-esrbDescription-update">ESRB Description: </label>
+    <input type="text" name="input-esrbDescription-update" id="input-esrbDescription-update">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_esrb.js"></script>

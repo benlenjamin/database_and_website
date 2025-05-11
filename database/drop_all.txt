@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS bsg_planets;                
+DROP TABLE IF EXISTS `bsg_people`;                
+DROP TABLE IF EXISTS `bsg_spaceship`;            
+DROP TABLE IF EXISTS `Customers`;               
+DROP TABLE IF EXISTS `TermsCode`;                
+DROP TABLE IF EXISTS `Invoices`;                  
+DROP TABLE IF EXISTS `Products`;                 
+DROP TABLE IF EXISTS `InvoiceDetails`;            
+DROP TABLE IF EXISTS `diagnostic`;                
+DROP TABLE IF EXISTS `customers`;                 
+DROP TABLE IF EXISTS `genres`;                     
+DROP TABLE IF EXISTS `esrbs`;                      
+DROP TABLE IF EXISTS `games`;                      
+DROP TABLE IF EXISTS `purchases`;                  
+DROP TABLE IF EXISTS `studios`;                    
+DROP TABLE IF EXISTS `releases`;   

@@ -1,0 +1,98 @@
+{{!-- Built using the cs_340 nodejs starter guide: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+{{!-- Create a table --}}
+<table id = "games_table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.gameID}}</td>
+            <td>{{this.item}}</td>
+            <td>{{this.genreID}}</td>
+            <td>{{this.esrbID}}</td>
+            <td><button onclick="deleteGame({{this.gameID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_game.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Game with AJAX</h2>
+<p>To add a new game, please enter their information below and click 'Submit'!</p>
+<form id="add-game-form-ajax">
+    <label for="input-item">item title: </label>
+    <input type="text" name="input-item" id="input-item">
+
+    <label for="input-genreID">genreID: </label>
+    <select name="input-genreID" id="input-genreID">
+        <option value="">Select a Genre</option>
+        {{#each genres_list}}
+        <option value="{{this.genreID}}">{{this.genreDescription}}, {{this.genreID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-esrbID">esrbID: </label>
+    <select name="input-esrbID" id="input-esrbID">
+        <option value="">Select a Rating</option>
+        {{#each esrbs_list}}
+        <option value="{{this.esrbID}}">{{this.esrbDescription}}, {{this.esrbID}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_game.js"></script>
+
+<h2>Updating A Game Form</h2>
+<p>To update a specific game, select their name from the drop down form</p>
+<form id="update-game-form-ajax">
+
+    <label for="input-item-update">Title: </label>
+    <select name="input-item-update" id="mySelectItem">
+        <option value="test">Select a Game Title</option>
+        {{#each games_list}}
+        <option value="{{this.gameID}}">{{this.item}}, {{this.gameID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-genreID">Genre: </label>
+    <select name="input-genre" id="mySelectGenre">
+        <option value="test">Select a Game Genre:</option>
+        {{#each genres_list}}
+        <option value="{{this.genreID}}">{{this.genreDescription}}, {{this.genreID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-esrbID">ESRB Rating: </label>
+    <select name="input-esrb" id="mySelectEsrb">
+        <option value="test">Select a Game Rating:</option>
+        {{#each esrbs_list}}
+        <option value="{{this.esrbID}}">{{this.esrbDescription}}, {{this.esrbID}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_game.js"></script>

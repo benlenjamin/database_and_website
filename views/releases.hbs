@@ -1,0 +1,92 @@
+{{!-- Built using the cs_340 nodejs starter guide: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+{{!-- Create a table --}}
+<table id = "releases_table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.gameID}}</td>
+            <td>{{this.studioID}}</td>
+            <td>{{this.publishDate}}</td>
+            <td><button onclick="deleteRelease({{this.gameID}} , {{this.studioID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_release.js"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Adding Release with AJAX</h2>
+<p>To add a new release, please enter the information below and click 'Submit'!</p>
+<form id="add-release-form-ajax">
+    <label for="input-gameID">gameID: </label>
+    <select name="input-gameID" id="input-gameID">
+        <option value="">Select a Game</option>
+        {{#each games_list}}
+        <option value="{{this.gameID}}">{{this.item}}, {{this.gameID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-studioID">studioID: </label>
+    <select name="input-studioID" id="input-studioID">
+        <option value="">Select a Studio</option>
+        {{#each studios_list}}
+        <option value="{{this.studioID}}">{{this.studioDescription}}, {{this.studioID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-publishDate">publishDate: </label>
+    <input type="date" name="input-publishDate" id="input-publishDate">
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_release.js"></script>
+
+<h2>Updating A Release Form</h2>
+<p></p>
+<form id="update-release-form-ajax">
+
+    <label for="input-gameID-update">gameID: </label>
+    <select name="input-gameID-update" id="input-gameID-update">
+        <option value="test">Select a Game:</option>
+        {{#each games_list}}
+        <option value="{{this.gameID}}">{{this.item}}, {{this.gameID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-studioID-update">studioID: </label>
+    <select name="input-studioID-update" id="input-studioID-update">
+        <option value="">Select a Studio:</option>
+        {{#each studios_list}}
+        <option value="{{this.studioID}}">{{this.studioDescription}}, {{this.studioID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-publishDate-update">publishDate: </label>
+    <input type="date" name="input-publishDate-update" id="input-publishDate-update">
+
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_release.js"></script>
